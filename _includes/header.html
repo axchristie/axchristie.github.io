@@ -1,0 +1,55 @@
+<header>
+{% include top-header.html %}
+<!--  <div id="access" hidden=""><img src="assets/lights.png" width="25px" height="25px"></div> -->
+<ul class="nav" id = "animate" hidden>
+	<li class="title hidden"><a href="#tippytop">{{ site.name }} {{ site.subtitle }}</a></li>
+	<li class = 'top-nav animated fadeInDown' id="top-nav-one">{{ site.data.top-nav.one }}</li>	
+	<li class = 'top-nav animated fadeInDown' id="top-nav-two">{{ site.data.top-nav.two }}</li>	
+	<li class = 'top-nav animated fadeInDown' id="top-nav-three"><a href="#service">{{ site.data.top-nav.three }}</a></li>	
+	<li class = 'top-nav animated fadeInDown' id="top-nav-four"><a href="#selected-blog-posts">{{ site.data.top-nav.four }}</a></li>	
+	<li class = 'top-nav animated fadeInDown' id="top-nav-five">{{ site.data.top-nav.five }}</li>	
+</ul>
+
+<ul class="nav" id = "mobile" hidden>
+	<li class="title">{{ site.name }} {{ site.subtitle }}</li>
+	<li class = 'top-nav' id="top-nav-zero"><a href="#tippytop">Welcome</a></li>	
+	<li class = 'top-nav' id="top-nav-one">{{ site.data.top-nav.one }}</li>	
+	<li class = 'top-nav' id="top-nav-two">{{ site.data.top-nav.two }}</li>	
+	<li class = 'top-nav' id="top-nav-three"><a href="#service">{{ site.data.top-nav.three }}</a></li>	
+	<li class = 'top-nav' id="top-nav-four"><a href="#selected-blog-posts">{{ site.data.top-nav.four }}</a></li>	
+	<li class = 'top-nav' id="top-nav-five">{{ site.data.top-nav.five }}</li>	
+</ul>
+
+
+ <ul class="bottom-nav hidden" id="contact">
+    {% for post in site.posts %}
+    	   {% if post.categories contains 'contact' %}
+			<li><a href="{{ post.link }}">{{ post.title }}</a></li>
+			{% endif %}
+    {% endfor %}
+<!--    {% for post in site.posts %}
+    	   {% if post.categories contains 'contact_post' %}
+			<li><a href="{{ base }}{{ post.url }}">{{ post.title }}</a></li>
+			{% endif %}
+    {% endfor %}    
+-->    
+</ul> 
+
+
+<ul class="bottom-nav hidden" id="research">
+    {% for post in site.posts %}
+    	   {% if post.categories contains 'research' %}
+			<li><a href="#{{ post.anchor }}">{{ post.title }}</a></li>
+			{% endif %}
+    {% endfor %}
+</ul>
+
+<ul class="bottom-nav hidden" id="teaching">
+    {% for post in site.posts %}
+    	   {% if post.categories contains 'teaching' %}
+			<li><a href="#{{ post.anchor }}">{{ post.title }}</a></li>
+			{% endif %}
+    {% endfor %}
+</ul>
+
+</header>

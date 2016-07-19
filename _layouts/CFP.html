@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{{ site.name }} CFPs</title>
+        <meta name="author" content="Alex Christie, University of Victoria (UVic) and the Boston Organizing Committee."        
+        <meta name="viewport" content="width=device-width">
+
+		<!-- base snippet for relative paths -->
+		{% include base.html %}
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{{ base }}/css/style.css">
+        <link rel="stylesheet" href="{{ base }}/css/animate.css">
+        <link rel="stylesheet" href="{{ base }}/css/nav.css">
+
+		<!-- Web Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400' rel='stylesheet' type='text/css'>
+
+		<!-- Favicon -->		 		 
+		 
+		<!-- Made with Fun Dip -->
+		<script>
+		{% include jquery-1.9.1.js %}
+		</script>
+
+    	<!-- Analytics -->
+		{% include analytics.html %}    	
+		
+    </head>   
+    <style>
+{% include wildstyle.css %}
+</style>
+{% include header.html %}
+<div id="padder"></div>
+<body>
+
+{% if page.tag contains 'text' %}
+<div class="post">
+                {{ content }}
+</div>
+{% else %}
+                {{ content }}
+{% endif %}
+
+</body>
+
+</html>

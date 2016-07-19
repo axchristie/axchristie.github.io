@@ -1,0 +1,284 @@
+.magic { height: 700px; width: 100%; position: relative; margin: 0 auto;}
+#magic { background: url(../assets/nightwood.jpg) 50% 0 no-repeat fixed; }
+
+/** FONTS **/
+@font-face {
+  font-family: "Futura Light";
+  src: url(../fonts/Futura-light.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Futura Bold";
+  src: url(../fonts/Futura-bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Futura Koyu";
+  src: url(../fonts/Futura-koyu.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "1942";
+  src: url(../fonts/1942.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "American-Type";
+  src: url(../fonts/american-type.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "lato";
+  src: url(../fonts/Lato-Light.ttf) format("truetype");
+}
+ 
+
+/** TOP-HEADER **/
+
+#top-header{
+	letter-spacing: .1em;
+	text-rendering: optimizeLegibility;
+	float: left;
+	width: 100%;
+	height: 15%;
+	text-align: center;	
+	line-height: 1em;
+	padding-top: 1em;	
+}
+
+#top-top{
+	font-size: 2.5em;
+}
+
+#top-bottom{
+	font-size: 4.5em;
+}
+
+#name{
+	font-family: "Futura Bold";
+	color: rgb(210,35,42);
+	text-transform: uppercase;
+	font-weight: 50;
+	font-size: 1.1em;
+}
+
+#subtitle{
+	font-family: "Futura Light";
+	text-transform: uppercase;
+	font-weight: 500;
+}
+
+#year{
+	font-family: "Futura Light";
+	text-transform: uppercase;	
+	color: rgb(210,35,42);
+	font-weight: 500;
+}
+
+
+#venue{	
+	font-family: "Futura Light";
+	text-transform: uppercase;	
+	font-weight: 500;
+	font-size: .3em;
+}
+
+/** BOTTOM-HEADER **/
+
+#bottom-header{
+	font-size: 2em;
+	letter-spacing: .1em;
+	text-rendering: optimizeLegibility;
+	width: inherit;
+	height: 10%;
+	line-height: 1%;	
+	text-align: center;
+}
+
+#a{
+	font-family: "Futura Light";
+	text-transform: lowercase;	
+	font-weight: 200;	
+	vertical-align: top;
+	}
+
+#a a:hover{
+	color: rgb(210,35,42);
+	border-bottom: 1px solid black;
+}
+
+/** HEADER **/
+
+header{
+	z-index: 999;
+	width: 100%;
+	background-color: rgba(255,255,255,.9);
+	color: black;
+	font-size: 1.25em;
+	box-shadow: 1px 1px 10px 1px grey;	
+}
+
+.pretty{
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    transition: all 1s;
+	background-color: white;    
+	position: absolute;
+}
+
+.sticky{
+	background-color: rgba(255,255,255,.9);
+	color: black;	
+	margin-top: 0%;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    transition: all 1s;	
+	position: fixed;
+}
+
+.sticky a{
+	color: black;	
+}
+
+.sticky a:visited{
+	color: black;
+}
+
+h1{
+	text-align: center;
+}
+
+h2{
+	text-align: center;
+}
+
+ul{
+	list-style-type: none;
+}
+
+header ul{
+	padding: .2em;
+	font-weight: 300;
+	font-size: .8em;
+	font-family: "lato";
+}
+
+header li{
+	font-size: 1em;
+	margin: .2em .3em;	
+	font-family: "lato";
+}
+
+li a:hover{
+	border-bottom: 3px solid rgb(210,35,42);
+}
+
+a{
+	color: black;
+	text-decoration: none;
+}
+
+.title a{
+	color: rgb(210,35,42);
+}
+
+.title a:visited{
+	color: rgb(210,35,42);
+}
+
+.title a:hover{
+	color: rgb(210,35,42);
+	text-decoration: none;
+	border-bottom: none;
+}
+
+a:visited{
+	color: black;
+	text-decoration: none;
+}
+
+li.title{
+	color: rgb(210,35,42);
+	text-transform: uppercase;
+	font-weight: 800;
+	font-size: 1.5em;
+}
+
+/** POST CONTENT **/
+
+.wrapper{
+	text-align: center;
+}
+
+.post{
+	width: 75%;
+	margin: 0 auto;
+	font-family: "lato";
+	font-weight: 300;
+	line-height: 2em;
+	text-align: justify;
+	border-left: 2px solid rgb(210,35,42);
+	font-size: 1em;	
+}
+
+.post a{
+	color: rgb(210,35,42);
+}
+
+.post a:visited{
+	color: rgb(210,35,42);
+}
+
+.post p{
+	padding-left: 10px;
+}
+
+h3{
+	border-bottom: 1px solid rgb(210,35,42);
+	padding-left: 1em;
+}
+
+.mobile_post{
+	width: 90%;
+	text-align: left;
+}
+
+/** img caption support (experimental) **/
+
+.figure{
+	text-align: center;
+	font-size: .5em;
+}
+
+.figure ul{
+margin-top: -20px;
+}
+
+/**grid code**/
+.grid{
+	color: white;
+	border: 1px solid black;
+	height: 200px;
+	width: 200px;
+	border-radius: 5px;
+	text-align: center;
+	font-family: helvetica;
+	font-size: 24px;
+	font-weight: bold;
+	text-shadow:
+    -.5px -.5px 0 #000,
+    .5px -.5px 0 #000,
+    -.5px .5px 0 #000,
+    .5px .5px 0 #000;
+   	background-size: cover;
+   	display: inline-table;
+}
+
+#menu a:hover {
+	opacity: .2;
+	border-bottom: none;
+}
+
+#menu{
+	margin: 0 auto;
+}
