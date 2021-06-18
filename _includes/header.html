@@ -5,8 +5,7 @@
 	<li class="title hidden"><a href="#tippytop">{{ site.name }} {{ site.subtitle }}</a></li>
 	<li class = 'top-nav animated fadeInDown' id="top-nav-one">{{ site.data.top-nav.one }}</li>	
 	<li class = 'top-nav animated fadeInDown' id="top-nav-two">{{ site.data.top-nav.two }}</li>	
-	<li class = 'top-nav animated fadeInDown' id="top-nav-three"><a href="#service">{{ site.data.top-nav.three }}</a></li>	
-	<li class = 'top-nav animated fadeInDown' id="top-nav-four"><a href="#selected-blog-posts">{{ site.data.top-nav.four }}</a></li>	
+	<li class = 'top-nav animated fadeInDown' id="top-nav-three"><a href="#international-service">{{ site.data.top-nav.three }}</a></li>	
 	<li class = 'top-nav animated fadeInDown' id="top-nav-five">{{ site.data.top-nav.five }}</li>	
 </ul>
 
@@ -15,8 +14,7 @@
 	<li class = 'top-nav' id="top-nav-zero"><a href="#tippytop">Welcome</a></li>	
 	<li class = 'top-nav' id="top-nav-one">{{ site.data.top-nav.one }}</li>	
 	<li class = 'top-nav' id="top-nav-two">{{ site.data.top-nav.two }}</li>	
-	<li class = 'top-nav' id="top-nav-three"><a href="#service">{{ site.data.top-nav.three }}</a></li>	
-	<li class = 'top-nav' id="top-nav-four"><a href="#selected-blog-posts">{{ site.data.top-nav.four }}</a></li>	
+	<li class = 'top-nav' id="top-nav-three"><a href="#international-service">{{ site.data.top-nav.three }}</a></li>	
 	<li class = 'top-nav' id="top-nav-five">{{ site.data.top-nav.five }}</li>	
 </ul>
 
@@ -24,7 +22,7 @@
  <ul class="bottom-nav hidden" id="contact">
     {% for post in site.posts %}
     	   {% if post.categories contains 'contact' %}
-			<li><a href="{{ post.link }}">{{ post.title }}</a></li>
+			<li><a href="{{ post.link }}" target="_blank">{{ post.title }}</a></li>
 			{% endif %}
     {% endfor %}
 <!--    {% for post in site.posts %}
