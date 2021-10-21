@@ -12,7 +12,7 @@ Alex Christie, Ph.D., is Assistant Professor of Digital Prototyping at Brock Uni
 ## Modern Manuscripts. Media studies. Humanities computing.
 ![lg left]({{ base }}assets/ProustMS.jpg)
 
-My research in the area of digital textuality examines where modernist (twentieth-century) authors experimented with proto-digital editing methods in the first half of the twentieth century. Such methods evolved alongside twentieth-century media and influenced the design of early computing machines, charting a line of influence between twentieth century novelists and early humanities computing. I recover these lost connections between literature and computing in my monograph *Editing Machines: Modern Manuscripts, Inscriptive Media, and the Humanities Computer*. I am also prototyping a series of innovative reading environments that draw upon these lost experiments in digital writing. Incorporating techniques from videogame design and machine learning (AI), these prototypes explore new models for the electronic book (ebook).
+My research in the area of digital textuality examines where modernist (twentieth-century) authors experimented with proto-digital editing methods in the first half of the twentieth century. Such methods evolved alongside twentieth-century media and influenced the design of early computing machines, charting a line of influence between twentieth century novelists and early humanities computing. I recover these lost connections between literature and computing in my monograph *Paper Processors*. I am also prototyping a series of innovative reading environments that draw upon these lost experiments in digital writing. Incorporating techniques from videogame design and machine learning (AI), these prototypes explore new models for the electronic book (ebook).
 
 ## Prototypes
 
@@ -26,7 +26,7 @@ My research in the area of digital textuality examines where modernist (twentiet
 
 ## Publications
 
-* *Editing Machines: Modern Manuscripts, Inscriptive Media, and the Humanities Computer*.  [In progress.]
+* *Paper Processors: Modern Manuscripts and Humanities Computing*.  [In progress.]
 
 * Christie, A. (2020). Processing modernism: The textual politics of Nightwood.” In J. Bloom & C. Rovera (Eds.), *Genesis and revision in modern British and Irish writers.* (pp. 223-246). Basingstoke: Palgrave Macmillan.
 
