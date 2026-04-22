@@ -1,0 +1,32 @@
+import * as THREE from 'three'
+import Experience from '../Experience.js'
+
+export default class MouseControls
+{
+	constructor()
+	{
+		// Setup
+		this.experience = new Experience()
+		this.sizes = this.experience.sizes
+
+		this.createMouseObject()
+		this.updateMouse()
+	}
+
+	createMouseObject()
+	{
+		this.mouse = {
+			x: { value: 0.5 },
+			y: { value: 0.0 },
+		}
+	}
+
+	updateMouse()
+	{
+		window.addEventListener('mousemove', (event) =>
+			{
+				this.mouse.x.value = event.clientX / this.sizes.width
+				this.mouse.y.value = -(event.clientY / this.sizes.height) + 0.5
+			})
+	}
+}

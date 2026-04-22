@@ -1,0 +1,32 @@
+import Experience from '../Experience.js'
+
+export default class Sizes
+{
+	constructor()
+	{
+		// Setup
+		this.experience = new Experience()
+		this.width = window.innerWidth
+		this.height = window.innerHeight
+		this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+		this.aspectRatio = window.innerWidth / window.innerHeight
+
+		// Mobile
+		if(this.aspectRatio < 1)
+		{
+			//this.height = document.querySelector('.splash-empty').clientHeight
+			//this.experience.xDistance = 1
+			
+			// Splash repositioning
+			//this.element = document.getElementsByClassName('splash-front')
+			//this.element[0].classList.add('splash-front-mobile')
+		}
+	}
+
+	resize()
+	{
+		this.width = window.innerWidth
+		this.height = window.innerHeight
+		this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+	}
+}

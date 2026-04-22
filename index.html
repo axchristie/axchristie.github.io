@@ -1,41 +1,37 @@
----
-layout: welcome
----
-<div id = "slow">
-    	  <div id = "slow" class="bg animated fadeIn"  style="" data-ibg-bg="{{ base }}assets/nightwood.jpg" z-index: 2;>
-    	  </div>    	  
-	{% include bottom-header.html %}
-</div>
+<!DOCTYPE html>
+<head>
+    <title>Assignment 1</title>
 
+    <!-- css-->
+    <link rel="stylesheet" href="css/style.css">
 
-<div class="content">
-{% capture my_include %}{% include update.md %}{% endcapture %}
-{{ my_include | markdownify }}
-</div>
+    <!-- three.js importmap-->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://ga.jspm.io/npm:three@0.158.0/build/three.module.js",
+                "OrbitControls": "https://ga.jspm.io/npm:three@0.158.0/examples/jsm/controls/OrbitControls.js",
+                "lil-gui": "https://ga.jspm.io/npm:lil-gui@0.19.1/dist/lil-gui.esm.js",
+		"gsap": "https://ga.jspm.io/npm:gsap@3.12.7/index.js"
+            }
+        }
+    </script>
 
-		</div><!-- Container -->
+    <!-- three.js scene -->
+    <script src="js/script.js" type="module"></script>
+</head>
+<body>
+  <!-- Canvas -->
+  <canvas class="webgl"></canvas>
 
-<!-- script for header -->
+  <!-- Splash Back -->
+  <div class="splash-back">
+    <h1>Alex Christie, Ph.D</h1>
+  </div>
 
+  <!-- Splash Front -->
+  <div class="splash-front">
+    <h2>Digital Humanities | WebXR | Something else </h2>
+  </div>
 
-
-<!-- script for scrolling -->
-	<script>
-
-	$(function() {
-	  $('a[href*=#]:not([href=#])').click(function() {
-	    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-
-	      var target = $(this.hash);
-	      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-	      if (target.length) {
-	        $('html,body').animate({
-	          scrollTop: target.offset().top - 100
-	        }, 1000);
-	        return false;
-	      }
-	    }
-	  });
-	  
-	});
-	</script>  
+</body>
