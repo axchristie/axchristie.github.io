@@ -12,6 +12,8 @@ export default class Sizes
 		this.aspectRatio = window.innerWidth / window.innerHeight
 
 		// Mobile
+
+		/*
 		if(this.aspectRatio < 1)
 		{
 			//this.height = document.querySelector('.splash-empty').clientHeight
@@ -21,6 +23,7 @@ export default class Sizes
 			//this.element = document.getElementsByClassName('splash-front')
 			//this.element[0].classList.add('splash-front-mobile')
 		}
+		*/
 	}
 
 	resize()
@@ -28,5 +31,24 @@ export default class Sizes
 		this.width = window.innerWidth
 		this.height = window.innerHeight
 		this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+		this.aspectRatio = window.innerWidth / window.innerHeight
+		if(this.aspectRatio < 1)
+		{
+			this.experience.isMobile = true
+			this.setMobile()
+		} else {
+			this.experience.isMobile = false
+			this.setDesktop()
+		}
+	}
+
+	setMobile()
+	{
+		console.log("Hello mobile")
+	}
+
+	setDesktop()
+	{
+		console.log("Hello desktop")
 	}
 }

@@ -34,11 +34,17 @@ export default class Experience
 		this.mouseControls = new MouseControls()
 		this.mouse = this.mouseControls.mouse
 
+		// Mobile
+		this.isMobile = false
+
 		// Debug
 		this.debug = new Debug()
 
 		// World
 		this.world = new World()
+
+		// Fire resize to capture isMobile
+		this.sizes.resize()
 
 		// Resize event
 		window.addEventListener('resize', () =>
