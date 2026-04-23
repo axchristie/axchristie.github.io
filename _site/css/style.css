@@ -11,13 +11,13 @@ canvas {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 80vh;
+	height: 82vh;
 	width: 100vw;
 	text-align: center;
 	z-index: 1;
 	h1
 	{
-		font-size: 15vmin;
+		font-size: 12vmin;
 		white-space: nowrap;
                 font-weight: 700;
                 color: $font-color;
@@ -40,7 +40,7 @@ canvas {
         }
 	h2
 	{
-		font-size: 6vmin;
+		font-size: 4vmin;
 		color: white;
                 font-weight: 300;
 	}

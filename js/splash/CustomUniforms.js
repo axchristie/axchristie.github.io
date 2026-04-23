@@ -26,11 +26,11 @@ export default class CustomUniforms
 
 			uTime: { value: this.time.elapsed },
 
-			uBigWavesSpeed: { value: 0.0015 },
+			uBigWavesSpeed: { value: 0.0005 },
 			uBigWavesFrequency: { value: new THREE.Vector2(0.74, 1.72) },
 			uBigWavesElevation: { value: 0.75 },
 
-			uSmallWavesSpeed: { value: 0.0001 },
+			uSmallWavesSpeed: { value: 0.00005 },
 			uSmallWavesFrequency: { value: 3.0 },
 			uSmallWavesElevation: { value: 0.5 },
 

@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import * as gsap from "gsap"
 import Experience from '../Experience.js'
 import Shader from './Shader.js'
+import Title from './Title.js'
 import DOMEvents from '../interaction/DOMEvents.js'
 
 let instance = null
@@ -38,13 +39,16 @@ export default class World
 		//this.shader.shaderMesh.position.x = this.xDistance
 		//this.shader.shaderMesh.position.y = - this.yDistance * 2.5
 
+		// Title
+		this.title = new Title()
+		
 		// DOM Events
 		this.events = new DOMEvents()
 	}
 
 	addLight()
 	{
-		this.ambientLight = new THREE.AmbientLight('#ffffff', 1)
+		this.ambientLight = new THREE.AmbientLight('#ffffff', 1.5)
 		this.scene.add(this.ambientLight)
 	}
 
@@ -67,5 +71,8 @@ export default class World
 		
 		// Shader
 		this.shader.update()
+
+		// Title
+		this.title.update()
 	}
 }

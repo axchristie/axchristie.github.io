@@ -14,7 +14,7 @@ export default class Camera
 		this.canvas = this.experience.canvas
 
 		this.setInstance()
-		this.setControls()
+		//this.setControls()
 	}
 
 	setInstance()
@@ -26,7 +26,7 @@ export default class Camera
 			100
 		)
 		this.instance.position.set(0, 0, 10)
-		this.instance.lookAt(0, 0, 0)
+		//this.instance.lookAt(0, 0, 0)
 		this.scene.add(this.instance)
 	}
 
@@ -44,7 +44,7 @@ export default class Camera
 
 	update()
 	{
-		this.controls.update()
+		//this.controls.update()
 		this.instance.position.copy(this.experience.customUniforms.camera.value)
 	}
 
