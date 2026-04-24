@@ -23,6 +23,7 @@ export default class CustomUniforms
 		this.customUniforms = {
 			shaderPosition: new THREE.Vector3(0, 0, 0),
 			shaderRotation: new THREE.Vector3(Math.PI * 0.5, 0, 0),
+			shaderScale: new THREE.Vector3(1, 1, 1),
 
 			uTime: { value: this.time.elapsed },
 
@@ -40,7 +41,11 @@ export default class CustomUniforms
 			uColorMultiplier: { value: 1.0 },
 			uSmallWavesIterations: { value: 4.0 },
 
-			camera: { value: new THREE.Vector3(0, 0, 10) }
+			camera: { value: new THREE.Vector3(0, 0, 10) },
+			title: { value: new THREE.Vector3(-15, 2.0, -10) },
+			menu: { value: new THREE.Vector3(-13.5, 8.0, -5) },
+
+			opacity: { value: 1.0 }
 
 		}
 	}

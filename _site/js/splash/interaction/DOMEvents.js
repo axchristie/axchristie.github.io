@@ -19,25 +19,29 @@ export default class DOMEvents
 		this.blah = document.querySelector('.splash-front')
 		this.blah.onclick = () =>
 		{
+			/*
 			gsap.to(this.experience.customUniforms.camera.value, { y: 5, duration: 2, ease: 'linear' })
+			gsap.to(this.experience.customUniforms.camera.value, { x: 5, duration: 2, ease: 'linear' })
 			setTimeout(() => {
 				this.blah.style.visibility = 'hidden'
 			}, 300)
-
-			/*
-			gsap.to(this.experience.customUniforms.camera.value, { y: 2.75, duration: 2, ease: 'linear' })
-			gsap.to(this.experience.customUniforms.camera.value, { x: -5, duration: 2, ease: 'linear' })
-			setTimeout(() => {
-				this.blah.style.visibility = 'hidden'
-			}, 500)
-			setTimeout(() => {
-				gsap.to(this.experience.customUniforms.camera.value, { z: -20, duration: 5, ease: 'linear' })
-			}, 2000)
 			*/
 
-			//gsap.to(this.experience.customUniforms.shaderRotation, { x: 0, duration: 2, ease: 'linear' })
-			//gsap.to(this.experience.customUniforms.shaderPosition, { y: -8, duration: 2, ease: 'linear' })
-			//gsap.to(this.experience.customUniforms.shaderPosition, { z: 15, duration: 2, ease: 'linear' })
+			setTimeout(() => {
+			}, 500)
+
+			gsap.to(this.experience.customUniforms.camera.value, { z: 20, duration: 2, ease: 'linear' })
+				gsap.to(this.experience.customUniforms.shaderPosition, { y: 2.0, duration: 2, ease: 'linear' })
+				gsap.to(this.experience.customUniforms.title.value, { y: 4.0, duration: 2, ease: 'linear' })
+				gsap.to(this.experience.customUniforms.shaderScale, { z: 0.2, duration: 1, ease: 'linear' })
+
+			setTimeout(() => {
+			}, 2000)
+			setTimeout(() => {
+				this.blah.style.visibility = 'hidden'
+				//gsap.to(this.experience.customUniforms.shaderPosition, { y: 11.0, duration: 2, ease: 'linear' })
+				//gsap.to(this.experience.customUniforms.title.value, { y: 18.0, duration: 2, ease: 'linear' })
+			}, 4000)
 		}
 
 	}

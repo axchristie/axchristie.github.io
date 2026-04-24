@@ -35,7 +35,7 @@ export default class Shader
 
 	shaderGeometry()
 	{
-		this.shaderGeometry = new THREE.PlaneGeometry(50, 10, 512, 512)
+		this.shaderGeometry = new THREE.PlaneGeometry(15, 10, 512, 512)
 	}
 
 	shaderMaterial()
@@ -50,6 +50,8 @@ export default class Shader
 	{
 		this.shaderMesh = new THREE.Mesh(this.shaderGeometry, this.shaderMaterial)
 		this.scene.add(this.shaderMesh)
+		this.shaderMesh.userData.relativeQuat = new THREE.Quaternion()
+		this.shaderMesh.userData.relativeQuat.copy(this.experience.camera.instance.quaternion).invert().multiply(this.shaderMesh.quaternion)
 	}
 
 	vertexShaderInitialization(shader)
@@ -260,9 +262,16 @@ export default class Shader
 		this.customUniforms.uDepthColor.value = new THREE.Color(this.colorObject.depthColor)
 		
 		this.shaderMesh.position.copy(this.customUniforms.shaderPosition)
-		this.shaderMesh.rotation.x = this.customUniforms.shaderRotation.x
-		this.shaderMesh.rotation.y = this.customUniforms.shaderRotation.y
-		this.shaderMesh.rotation.z = this.customUniforms.shaderRotation.z
+		this.shaderMesh.scale.copy(this.customUniforms.shaderScale)
+		//this.shaderMesh.rotation.x = this.customUniforms.shaderRotation.x
+		//this.shaderMesh.rotation.y = this.customUniforms.shaderRotation.y
+		//this.shaderMesh.rotation.z = this.customUniforms.shaderRotation.z
+
+		this.shaderMesh.lookAt(this.experience.camera.instance.position)
+		this.shaderMesh.rotateX(Math.PI * 0.5)
+
+		//this.shaderMesh.quaternion.copy(this.experience.camera.instance.quaternion).multiply(this.shaderMesh.userData.relativeQuat)
+
 
 		//console.log(this.mouse.x.value, this.mouse.y.value)
 	}
