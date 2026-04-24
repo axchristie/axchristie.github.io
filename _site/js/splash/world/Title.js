@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import World from './World.js'
 import {FontLoader} from 'FontLoader'
 import {TextGeometry} from 'TextGeometry'
 
@@ -9,6 +10,7 @@ export default class Title
 	{
 		// Setup
 		this.experience = new Experience()
+		this.world = new World()
 		this.scene = this.experience.scene
 		this.time = this.experience.time
 		this.mouse = this.experience.mouseControls.mouse
@@ -49,7 +51,7 @@ export default class Title
 		this.mesh = new THREE.Mesh(this.geometry, this.material)
 		this.mesh.position.set(-15, 2.0, -10)
 		this.mesh.scale.set(0.025, 0.025, 0.0005)
-		this.scene.add(this.mesh)
+		this.world.magicGroup.add(this.mesh)
 	}
 
 	drawMenu()

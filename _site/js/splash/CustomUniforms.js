@@ -44,6 +44,8 @@ export default class CustomUniforms
 			camera: { value: new THREE.Vector3(0, 0, 10) },
 			title: { value: new THREE.Vector3(-15, 2.0, -10) },
 			menu: { value: new THREE.Vector3(-13.5, 8.0, -5) },
+			magicGroup: { value: new THREE.Vector3(0, 0, 0) },
+			magicBackgroundGroup: { value: new THREE.Vector3(0, 0, 0) },
 
 			opacity: { value: 1.0 }
 

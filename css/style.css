@@ -1,3 +1,6 @@
+body {
+	background-color: dimgray;
+}
 canvas {
 	position: fixed;
 	top: 0;

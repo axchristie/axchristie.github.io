@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import gsap from "gsap"
 import Experience from '../Experience.js'
+import World from '../world/World.js'
 
 export default class DOMEvents
 {
@@ -8,7 +9,11 @@ export default class DOMEvents
 	{
 		// Setup
 		this.experience = new Experience()
+		this.world = new World()
 		this.camera = this.experience.camera
+
+		// Custom Uniforms
+		this.customUniforms = this.experience.customUniforms
 
 		// Test
 		this.test()
@@ -19,29 +24,22 @@ export default class DOMEvents
 		this.blah = document.querySelector('.splash-front')
 		this.blah.onclick = () =>
 		{
-			/*
-			gsap.to(this.experience.customUniforms.camera.value, { y: 5, duration: 2, ease: 'linear' })
-			gsap.to(this.experience.customUniforms.camera.value, { x: 5, duration: 2, ease: 'linear' })
-			setTimeout(() => {
-				this.blah.style.visibility = 'hidden'
-			}, 300)
-			*/
-
-			setTimeout(() => {
-			}, 500)
-
+			// Camera
 			gsap.to(this.experience.customUniforms.camera.value, { z: 20, duration: 2, ease: 'linear' })
-				gsap.to(this.experience.customUniforms.shaderPosition, { y: 2.0, duration: 2, ease: 'linear' })
-				gsap.to(this.experience.customUniforms.title.value, { y: 4.0, duration: 2, ease: 'linear' })
-				gsap.to(this.experience.customUniforms.shaderScale, { z: 0.2, duration: 1, ease: 'linear' })
 
-			setTimeout(() => {
-			}, 2000)
+			// Shader
+			gsap.to(this.experience.customUniforms.shaderScale, { z: 0.2, duration: 1, ease: 'linear' })
+
+			// Magic Group
+			gsap.to(this.customUniforms.magicGroup.value, { y: 2, duration: 2, ease: 'linear' })
+
+			// Magic BackgroundGroup
+			gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 30, duration: 2, ease: 'linear' })
+
+			// splash-front
 			setTimeout(() => {
 				this.blah.style.visibility = 'hidden'
-				//gsap.to(this.experience.customUniforms.shaderPosition, { y: 11.0, duration: 2, ease: 'linear' })
-				//gsap.to(this.experience.customUniforms.title.value, { y: 18.0, duration: 2, ease: 'linear' })
-			}, 4000)
+			}, 2000)
 		}
 
 	}

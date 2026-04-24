@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import World from './World.js'
 
 export default class Shader
 {
@@ -7,6 +8,7 @@ export default class Shader
 	{
 		// Setup
 		this.experience = new Experience()
+		this.world = new World()
 		this.scene = this.experience.scene
 		this.time = this.experience.time
 		this.mouse = this.experience.mouseControls.mouse
@@ -49,7 +51,7 @@ export default class Shader
 	shaderMesh()
 	{
 		this.shaderMesh = new THREE.Mesh(this.shaderGeometry, this.shaderMaterial)
-		this.scene.add(this.shaderMesh)
+		this.world.magicGroup.add(this.shaderMesh)
 		this.shaderMesh.userData.relativeQuat = new THREE.Quaternion()
 		this.shaderMesh.userData.relativeQuat.copy(this.experience.camera.instance.quaternion).invert().multiply(this.shaderMesh.quaternion)
 	}
