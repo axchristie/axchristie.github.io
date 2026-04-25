@@ -13,15 +13,13 @@ export default class MagicBackground
 		this.time = this.experience.time
 		this.mouse = this.experience.mouseControls.mouse
 
-		console.log('hi')
-
 		this.createMagicBackground()
 	}
 
 	createMagicBackground()
 	{
 		this.testCube = new THREE.Mesh(
-			new THREE.BoxGeometry(100, 100, 1),
+			new THREE.BoxGeometry(1000, 100, 1),
 			new THREE.MeshBasicMaterial({
 				color: new THREE.Color('white')
 			})

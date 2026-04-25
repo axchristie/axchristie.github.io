@@ -46,6 +46,10 @@ export default class Experience
 		// Fire resize to capture isMobile
 		this.sizes.resize()
 
+		// Test
+		this.el = document.querySelector('.test')
+		this.el.remove()
+
 		// Resize event
 		window.addEventListener('resize', () =>
 			{

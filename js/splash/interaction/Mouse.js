@@ -19,6 +19,8 @@ export default class MouseControls
 			x: { value: 0.5 },
 			y: { value: 0.0 },
 		}
+
+		this.scrollY = 0
 	}
 
 	updateMouse()
@@ -28,5 +30,12 @@ export default class MouseControls
 				this.mouse.x.value = event.clientX / this.sizes.width
 				this.mouse.y.value = -(event.clientY / this.sizes.height) + 0.5
 			})
+
+		window.addEventListener('scroll', () => {
+				this.scrollY = window.scrollY
+				this.maxScroll = document.body.scrollHeight - window.innerHeight;
+				this.scrollProgress = this.scrollY / this.maxScroll;
+			}, { passive: true })
+
 	}
 }
