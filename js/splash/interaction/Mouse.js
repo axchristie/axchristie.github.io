@@ -21,6 +21,7 @@ export default class MouseControls
 		}
 
 		this.scrollY = 0
+		this.scrollProgress = 0
 	}
 
 	updateMouse()

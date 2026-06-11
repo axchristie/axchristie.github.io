@@ -95,5 +95,8 @@ export default class World
 
 		// Title
 		this.title.update()
+
+		// DOMEvents
+		this.events.update()
 	}
 }

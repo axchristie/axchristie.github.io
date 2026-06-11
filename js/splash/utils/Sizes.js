@@ -44,11 +44,11 @@ export default class Sizes
 
 	setMobile()
 	{
-		console.log("Hello mobile")
+		//console.log("Hello mobile")
 	}
 
 	setDesktop()
 	{
-		console.log("Hello desktop")
+		//console.log("Hello desktop")
 	}
 }
