@@ -15,8 +15,10 @@ export default class DOMEvents
 		// Custom Uniforms
 		this.customUniforms = this.experience.customUniforms
 
+		this.navbarScrollMultiplier = 2.5
+
 		// state
-		this.state = 'splash'	// splash, transition, navbar
+		this.state = 'splash'	// splash, navbar, goback
 
 		// Test
 		this.test()
@@ -40,32 +42,25 @@ export default class DOMEvents
 			//gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 30, duration: 2, ease: 'linear' })
 			gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 74, duration: 2, ease: 'linear' })
 
-			// splash-front
+			// Add section
 			setTimeout(() => {
-				this.state = 'transition'
-
 				this.blah.style.visibility = 'hidden'
 				//document.body.removeChild(this.blah)
 				//document.body.appendChild(this.blah)
 				
 				document.body.appendChild(this.experience.el)
 
-				const el = document.querySelector('.test')
-				const rect = el.getBoundingClientRect()
+				//const el = document.querySelector('.test')
+				const rect = this.experience.el.getBoundingClientRect()
 				
 				const absoluteTop = window.scrollY + rect.top
-				const offset = window.innerHeight * 0.70
+				const offset = window.innerHeight * 0.4
 				
 				window.scrollTo({
 				  top: absoluteTop - offset,
 				  behavior: 'smooth'
 				})
 			}, 2000)
-
-			setTimeout(() => {
-				///gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 54, duration: 2, ease: 'linear' })
-			}, 2000)
-
 		}
 
 	}
@@ -76,18 +71,21 @@ export default class DOMEvents
 	updateSplash()
 	{
 		//console.log('splashy')
+		if(this.experience.mouseControls.scrollProgress > 0.2){ this.state = 'navbar' }
 	}
 
-	updateTransition()
+	updateNavbar()
 	{
-		//console.log('transitionz')
 		//console.log(this.experience.mouseControls.scrollProgress)
 
-		if(this.customUniforms.title.value.y < 16.5)
-		{
-			this.customUniforms.title.value.y = (this.experience.mouseControls.scrollProgress * 30)
-			this.customUniforms.shaderPosition.y = (this.experience.mouseControls.scrollProgress * 21) - 1.7
-			//console.log(this.customUniforms.title.value.y)
+		// Position title and shader from scrollProgress
+		this.customUniforms.title.value.y = (this.experience.mouseControls.scrollProgress * 20 * this.navbarScrollMultiplier)
+		this.customUniforms.shaderPosition.y = (this.experience.mouseControls.scrollProgress * 14 * this.navbarScrollMultiplier) - 1.7
+
+		// Clamp title and shader pos to make them sticky
+		if(this.customUniforms.title.value.y > 16.5){
+			this.customUniforms.title.value.y = 16.5
+			this.customUniforms.shaderPosition.y = 9.87
 		}
 
 		if(this.customUniforms.magicBackgroundGroup.value.y < 74)
@@ -96,28 +94,58 @@ export default class DOMEvents
 			this.customUniforms.magicBackgroundGroup.value.y = 60 + (this.experience.mouseControls.scrollProgress * 50)
 		}
 
-		// COME BACK TO ADD NAV STATE
-		//if(document.body.contains(this.blah)){ console.log('y') }
-		let rect = document.querySelector('.test').getBoundingClientRect()
-		console.log(rect.top)
+		// Fire goback state
+		if(this.experience.mouseControls.scrollProgress < 0.15){ this.state = 'goback' }
 
-		if(rect.top < 10 && document.body.contains(this.blah))
-		{
-			document.body.removeChild(this.blah)
-		}
-		
-			//gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 30, duration: 2, ease: 'linear' })
+			//this.customUniforms.magicBackgroundGroup.value.y = 73.9
+
+		// Transition to navbar once .test class hits top of window
+		//let rect = document.querySelector('.test').getBoundingClientRect()
+		//if(rect.top < 10){ this.state = 'navbar' }
+		//if(this.experience.mouseControls.scrollProgress < 0.1){ this.state = 'navbar' }
+	}
+
+	updateGoBack()
+	{
+		// Title and Shader
+		this.customUniforms.title.value.y = 2.0
+		this.customUniforms.shaderPosition.y = 0
+
+		// Camera
+		gsap.to(this.experience.customUniforms.camera.value, { z: 10, duration: 2, ease: 'linear' })
+
+		// Shader
+		gsap.to(this.experience.customUniforms.shaderScale, { z: 1, duration: 1, ease: 'linear' })
+
+		// Magic Group
+		gsap.to(this.customUniforms.magicGroup.value, { y: 0, duration: 2, ease: 'linear' })
+
+		// Magic Background Group
+		gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 0, duration: 2, ease: 'linear' })
+
+		this.blah.style.visibility = 'visible'
+
+		this.experience.el.remove()
+
+		setTimeout(() => {
+			this.state = 'splash'
+		}, 2000)
 	}
 
 	update()
 	{
+		console.log(this.state, this.experience.mouseControls.scrollProgress)
 		switch(this.state) {
 			case 'splash':
 				this.updateSplash()
 				break
 
-			case 'transition':
-				this.updateTransition()
+			case 'navbar':
+				this.updateNavbar()
+				break
+
+			case 'goback':
+				this.updateGoBack()
 				break
 
 			default:

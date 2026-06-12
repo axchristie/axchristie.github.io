@@ -12,10 +12,9 @@ export default class Sizes
 		this.aspectRatio = window.innerWidth / window.innerHeight
 
 		// Mobile
-
-		/*
 		if(this.aspectRatio < 1)
 		{
+			console.log('hello mobile')
 			//this.height = document.querySelector('.splash-empty').clientHeight
 			//this.experience.xDistance = 1
 			
@@ -23,7 +22,6 @@ export default class Sizes
 			//this.element = document.getElementsByClassName('splash-front')
 			//this.element[0].classList.add('splash-front-mobile')
 		}
-		*/
 	}
 
 	resize()

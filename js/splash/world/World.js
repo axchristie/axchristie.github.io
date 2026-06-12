@@ -41,7 +41,7 @@ export default class World
 		this.scene.add(this.magicBackgroundGroup)
 
 		// Test
-		//this.createTestCube()
+		this.createTestCube()
 
 		// Light
 		this.addLight()
@@ -73,8 +73,11 @@ export default class World
 			new THREE.BoxGeometry(3, 3, 3),
 			new THREE.MeshNormalMaterial()
 		)
-		this.testCube.position.y = 1
+		this.testCube.position.y = 5
+		this.testCube.position.x = -10
+		this.testCube.position.z = -15
 		this.testCube.castShadow = true
+		this.testCube.visible = false
 		this.scene.add(this.testCube)
 	}
 
