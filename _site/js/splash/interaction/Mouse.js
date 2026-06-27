@@ -12,6 +12,9 @@ export default class MouseControls
 
 		this.raycaster = new THREE.Raycaster()
 		this.rayMouse = new THREE.Vector2()
+		this.boxToTest = new THREE.Box3()
+		this.currentIntersect = null
+		this.previousIntersect = null
 
 		this.createMouseObject()
 		this.updateMouse()
@@ -40,14 +43,34 @@ export default class MouseControls
 
 				this.raycaster.setFromCamera(this.rayMouse, this.experience.camera.instance)
 
-				const intersects = this.raycaster.intersectObject(this.experience.world.testCube)
-				if(intersects.length > 0)
-				{
-					this.experience.world.testCube.material.wireframe = true
-				} else {
-					this.experience.world.testCube.material.wireframe = false
+				// Unset all objectsToIntersect.userData.intersected
+				for (const object of this.experience.world.objectsToIntersect){
+					object.userData.intersected = false
 				}
 
+				/* DEPRECATED
+				const intersects = this.raycaster.intersectObjects(this.experience.world.objectsToIntersect)
+				if(intersects.length > 0)
+				{
+					intersects[0].object.userData.intersected = true
+					//this.experience.world.testCube.material.wireframe = true
+				} else {
+					//this.experience.world.testCube.material.wireframe = false
+				}
+				*/
+
+				if(this.experience.world.events.state === 'splash')
+				{
+				for (const object of this.experience.world.objectsToIntersect)
+				{
+					this.boxToTest.setFromObject(object)
+
+					if (this.raycaster.ray.intersectsBox(this.boxToTest))
+					{
+						object.userData.intersected = true
+					}
+				}
+				}
 			})
 
 		window.addEventListener('scroll', () => {

@@ -23,6 +23,9 @@ export default class World
 		this.time = this.experience.time
 		this.sizes = this.experience.sizes
 
+		// Intersect Objects
+		this.objectsToIntersect = []
+
 		// Custom Uniforms
 		this.customUniforms = this.experience.customUniforms
 
@@ -42,7 +45,7 @@ export default class World
 		this.scene.add(this.magicBackgroundGroup)
 
 		// Test
-		this.createTestCube()
+		//this.createTestCube()
 
 		// Light
 		this.addLight()

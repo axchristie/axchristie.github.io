@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import gsap from "gsap"
 import Experience from '../Experience.js'
 import World from './World.js'
 import {FontLoader} from 'FontLoader'
@@ -14,16 +15,18 @@ export default class Menu
 		this.scene = this.experience.scene
 		this.time = this.experience.time
 		this.mouse = this.experience.mouseControls.mouse
+		this.colorObject = this.experience.uniforms.colorObject
 
 		// Params
 		this.menuCreated = false
+		this.lerpSpeed = 0.07
 
 		// Setup
 		this.menuItems = [
 			{
 				id: 1,
 				text: 'About',
-				color: 'purple',
+				color: 'orange',
 				domEl: 'id1',
 				opacity: 1,
 				scale: new THREE.Vector3(0.02, 0.02, 0.001),
@@ -32,7 +35,7 @@ export default class Menu
 			{
 				id: 2,
 				text: 'Projects',
-				color: 'pink',
+				color: 'red',
 				domEl: 'id2',
 				opacity: 1,
 				scale: new THREE.Vector3(0.02, 0.02, 0.0001),
@@ -78,7 +81,45 @@ export default class Menu
 			item.mesh = new THREE.Mesh(item.geometry, item.material)
 			item.mesh.position.copy(item.position)
 			item.mesh.scale.copy(item.scale)
+			item.mesh.userData.params = item
 			this.scene.add(item.mesh)
+
+			item.mesh.userData.intersected = false
+			item.mesh.userData.previousIntersect = false
+			this.world.objectsToIntersect.push(item.mesh)
+		}
+	}
+
+	updateMenuItems()
+	{
+		for (const item of this.menuItems)
+		{
+			// Hover exit
+			if(item.mesh.userData.previousIntersect && item.mesh.userData.previousIntersect != item.mesh.userData.intersected)
+			{
+				//console.log('hover exit')
+				//console.log(item.mesh.userData.params)
+				gsap.to(item.mesh.rotation, { y: 0, duration: 0.5, ease: 'linear' })
+				gsap.to(item.mesh.scale, { z: item.mesh.userData.params.scale.z, duration: 0.5, ease: 'linear' })
+			}
+
+			if(item.mesh.userData.intersected)
+			{
+				//item.mesh.material.wireframe = true
+
+				// lerp color
+				this.colorObject.depthColor.lerp(item.mesh.material.color, this.lerpSpeed)
+
+				// gsap animation
+				gsap.to(item.mesh.rotation, { y: -Math.PI * 0.04, duration: 0.5, ease: 'linear' })
+				gsap.to(item.mesh.scale, { z: 0.005, duration: 0.5, ease: 'linear' })
+
+				item.mesh.userData.previousIntersect = true
+			} else {
+				//item.mesh.material.wireframe = false
+
+				item.mesh.userData.previousIntersect = false
+			}
 		}
 	}
 
@@ -89,6 +130,10 @@ export default class Menu
 			//this.mesh.userData.relativeQuat = new THREE.Quaternion()
 			//this.mesh.userData.relativeQuat.copy(this.experience.camera.instance.quaternion).invert().multiply(this.mesh.quaternion)
 			this.menuCreated = true
+		}
+
+		if(this.font && this.menuCreated){
+			this.updateMenuItems()
 		}
 	}
 

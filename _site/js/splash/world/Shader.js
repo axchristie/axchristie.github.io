@@ -260,8 +260,10 @@ export default class Shader
 	update()
 	{
 		this.customUniforms.uTime.value = this.time.elapsed
-		this.customUniforms.uSurfaceColor.value = new THREE.Color(this.colorObject.surfaceColor)
-		this.customUniforms.uDepthColor.value = new THREE.Color(this.colorObject.depthColor)
+		//this.customUniforms.uSurfaceColor.value = new THREE.Color(this.colorObject.surfaceColor) - silly
+		this.customUniforms.uSurfaceColor.value = this.colorObject.surfaceColor.clone()
+		//this.customUniforms.uDepthColor.value = new THREE.Color(this.colorObject.depthColor) - silly
+		this.customUniforms.uDepthColor.value = this.colorObject.depthColor.clone()
 		
 		this.shaderMesh.position.copy(this.customUniforms.shaderPosition)
 		this.shaderMesh.scale.copy(this.customUniforms.shaderScale)

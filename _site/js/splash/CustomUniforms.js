@@ -14,8 +14,10 @@ export default class CustomUniforms
 	createColorObject()
 	{
 		this.colorObject = {}
-		this.colorObject.surfaceColor = '#6661f7'
-		this.colorObject.depthColor = '#6606c9'
+		//this.colorObject.surfaceColor = '#6661f7' - silly
+		this.colorObject.surfaceColor = new THREE.Color('#6661f7')
+		//this.colorObject.depthColor = '#6606c9' - silly
+		this.colorObject.depthColor = new THREE.Color('#6606c9')
 	}
 	
 	createCustomUniforms()
