@@ -77,7 +77,7 @@ export default class Title
 	{
 		if(this.font && !this.titleCreated){
 			this.drawTitle()
-			this.drawMenu()
+			//this.drawMenu()
 			this.mesh.userData.relativeQuat = new THREE.Quaternion()
 			this.mesh.userData.relativeQuat.copy(this.experience.camera.instance.quaternion).invert().multiply(this.mesh.quaternion)
 			this.titleCreated = true
@@ -87,7 +87,7 @@ export default class Title
 		{
 			this.mesh.material.opacity = this.experience.customUniforms.opacity.value
 			this.mesh.position.copy(this.experience.customUniforms.title.value)
-			this.menu.position.copy(this.experience.customUniforms.menu.value)
+			//this.menu.position.copy(this.experience.customUniforms.menu.value)
 
 			this.mesh.quaternion.copy(this.experience.camera.instance.quaternion).multiply(this.mesh.userData.relativeQuat)
 		}

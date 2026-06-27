@@ -134,7 +134,7 @@ export default class DOMEvents
 
 	update()
 	{
-		console.log(this.state, this.experience.mouseControls.scrollProgress)
+		//console.log(this.state, this.experience.mouseControls.scrollProgress)
 		switch(this.state) {
 			case 'splash':
 				this.updateSplash()

@@ -3,6 +3,7 @@ import * as gsap from "gsap"
 import Experience from '../Experience.js'
 import Shader from './Shader.js'
 import Title from './Title.js'
+import Menu from './Menu.js'
 import MagicBackground from './MagicBackground.js'
 import DOMEvents from '../interaction/DOMEvents.js'
 
@@ -56,6 +57,9 @@ export default class World
 
 		// Title
 		this.title = new Title()
+
+		// Menu
+		this.menu = new Menu()
 		
 		// DOM Events
 		this.events = new DOMEvents()
@@ -77,7 +81,7 @@ export default class World
 		this.testCube.position.x = -10
 		this.testCube.position.z = -15
 		this.testCube.castShadow = true
-		this.testCube.visible = false
+		this.testCube.visible = true
 		this.scene.add(this.testCube)
 	}
 
@@ -98,6 +102,9 @@ export default class World
 
 		// Title
 		this.title.update()
+
+		// Menu
+		this.menu.update()
 
 		// DOMEvents
 		this.events.update()
