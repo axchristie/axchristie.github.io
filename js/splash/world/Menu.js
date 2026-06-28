@@ -19,27 +19,27 @@ export default class Menu
 
 		// Params
 		this.menuCreated = false
-		this.lerpSpeed = 0.07
+		this.lerpSpeed = 0.03
 
 		// Setup
 		this.menuItems = [
 			{
 				id: 1,
 				text: 'About',
-				color: 'orange',
+				color: 'aqua',
 				domEl: 'id1',
 				opacity: 1,
-				scale: new THREE.Vector3(0.02, 0.02, 0.001),
-				position: new THREE.Vector3(-15, 10, -10)
+				scale: new THREE.Vector3(0.015, 0.015, 0.0001),
+				position: new THREE.Vector3(-25, 12, -10)
 			},
 			{
 				id: 2,
 				text: 'Projects',
-				color: 'red',
+				color: 'orange',
 				domEl: 'id2',
 				opacity: 1,
-				scale: new THREE.Vector3(0.02, 0.02, 0.0001),
-				position: new THREE.Vector3(-15, 7, -10)
+				scale: new THREE.Vector3(0.015, 0.015, 0.0001),
+				position: new THREE.Vector3(-15, 12, -10)
 			}
 		]
 
@@ -53,7 +53,7 @@ export default class Menu
 		this.fontLoader = new FontLoader()
 
 		this.fontLoader.load(
-			'../../../fonts/helvetiker_bold.typeface.json',
+			'../../../fonts/helvetiker_regular.typeface.json',
 			(response) =>
 			{
 				this.font = response
@@ -71,7 +71,7 @@ export default class Menu
 				})
 
 			item.material = new THREE.MeshLambertMaterial({
-				color: new THREE.Color(item.color),
+				color: new THREE.Color('black'),
 				emissiveIntensity: 10,
 				wireframe: false,
 				transparent: true,
@@ -82,7 +82,8 @@ export default class Menu
 			item.mesh.position.copy(item.position)
 			item.mesh.scale.copy(item.scale)
 			item.mesh.userData.params = item
-			this.scene.add(item.mesh)
+			//this.scene.add(item.mesh)
+			this.world.magicGroup.add(item.mesh)
 
 			item.mesh.userData.intersected = false
 			item.mesh.userData.previousIntersect = false
@@ -99,24 +100,31 @@ export default class Menu
 			{
 				//console.log('hover exit')
 				//console.log(item.mesh.userData.params)
-				gsap.to(item.mesh.rotation, { y: 0, duration: 0.5, ease: 'linear' })
-				gsap.to(item.mesh.scale, { z: item.mesh.userData.params.scale.z, duration: 0.5, ease: 'linear' })
+				//this.colorObject.surfaceColor.lerp(this.colorObject.surfaceColorStart, 1)
+				//gsap.to(item.mesh.rotation, { y: 0, duration: 0.5, ease: 'linear' })
+				//gsap.to(item.mesh.scale, { z: item.mesh.userData.params.scale.z, duration: 0.5, ease: 'linear' })
 			}
 
 			if(item.mesh.userData.intersected)
 			{
 				//item.mesh.material.wireframe = true
 
+				let color = new THREE.Color(item.mesh.userData.params.color)
+				item.mesh.material.color.lerp(color, this.lerpSpeed)
+
 				// lerp color
-				this.colorObject.depthColor.lerp(item.mesh.material.color, this.lerpSpeed)
+				//this.colorObject.surfaceColor.lerp(item.mesh.material.color, this.lerpSpeed)
+				this.colorObject.surfaceColor.lerp(color, this.lerpSpeed)
 
 				// gsap animation
-				gsap.to(item.mesh.rotation, { y: -Math.PI * 0.04, duration: 0.5, ease: 'linear' })
-				gsap.to(item.mesh.scale, { z: 0.005, duration: 0.5, ease: 'linear' })
+				//gsap.to(item.mesh.rotation, { y: -Math.PI * 0.04, duration: 0.5, ease: 'linear' })
+				//gsap.to(item.mesh.scale, { z: 0.005, duration: 0.5, ease: 'linear' })
 
 				item.mesh.userData.previousIntersect = true
 			} else {
 				//item.mesh.material.wireframe = false
+				let color = new THREE.Color('black')
+				item.mesh.material.color.lerp(color, this.lerpSpeed)
 
 				item.mesh.userData.previousIntersect = false
 			}

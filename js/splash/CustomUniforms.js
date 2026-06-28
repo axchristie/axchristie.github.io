@@ -15,8 +15,10 @@ export default class CustomUniforms
 	{
 		this.colorObject = {}
 		//this.colorObject.surfaceColor = '#6661f7' - silly
+		this.colorObject.surfaceColorStart = new THREE.Color('#6661f7')
 		this.colorObject.surfaceColor = new THREE.Color('#6661f7')
 		//this.colorObject.depthColor = '#6606c9' - silly
+		this.colorObject.depthColorStart = new THREE.Color('#6606c9')
 		this.colorObject.depthColor = new THREE.Color('#6606c9')
 	}
 	
@@ -31,7 +33,7 @@ export default class CustomUniforms
 
 			uBigWavesSpeed: { value: 0.0005 },
 			uBigWavesFrequency: { value: new THREE.Vector2(0.74, 1.72) },
-			uBigWavesElevation: { value: 0.75 },
+			uBigWavesElevation: { value: 0.65 },
 
 			uSmallWavesSpeed: { value: 0.00005 },
 			uSmallWavesFrequency: { value: 3.0 },

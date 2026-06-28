@@ -9,6 +9,8 @@ export default class MouseControls
 		this.experience = new Experience()
 		this.camera = this.experience.camera.instance
 		this.sizes = this.experience.sizes
+		this.colorObject = this.experience.uniforms.colorObject
+		this.lerpSpeed = 0.08
 
 		this.raycaster = new THREE.Raycaster()
 		this.rayMouse = new THREE.Vector2()
@@ -61,15 +63,21 @@ export default class MouseControls
 
 				if(this.experience.world.events.state === 'splash')
 				{
-				for (const object of this.experience.world.objectsToIntersect)
-				{
-					this.boxToTest.setFromObject(object)
-
-					if (this.raycaster.ray.intersectsBox(this.boxToTest))
+					let intersecting = false
+					for (const object of this.experience.world.objectsToIntersect)
 					{
-						object.userData.intersected = true
+						this.boxToTest.setFromObject(object)
+	
+						if (this.raycaster.ray.intersectsBox(this.boxToTest))
+						{
+							object.userData.intersected = true
+							intersecting = true
+						}
 					}
-				}
+					if(!intersecting && !this.colorObject.surfaceColor.equals(this.colorObject.surfaceColorStart))
+					{
+						this.colorObject.surfaceColor.lerp(this.colorObject.surfaceColorStart, this.lerpSpeed)
+					}
 				}
 			})
 
