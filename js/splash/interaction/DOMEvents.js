@@ -29,6 +29,19 @@ export default class DOMEvents
 		this.blah = document.querySelector('.splash-front')
 		this.blah.onclick = () =>
 		{
+			// Only proceed if we're intersecting
+			if(!this.experience.mouseControls.intersected){ return }
+
+			// fadeOut menuGroup && remove domEl children
+			for (const child of this.experience.world.menu.menuGroup.children)
+			{
+				// fadeOut
+				gsap.to(child.material, { opacity: 0, duration: 2, ease: 'linear' })
+
+				// remove domEl
+				child.userData.params.domEl.remove()
+			}
+
 			// Camera
 			gsap.to(this.experience.customUniforms.camera.value, { z: 20, duration: 2, ease: 'linear' })
 
@@ -42,16 +55,16 @@ export default class DOMEvents
 			//gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 30, duration: 2, ease: 'linear' })
 			gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 74, duration: 2, ease: 'linear' })
 
-			// Add section
+			// Set domEl
+			let domEl = this.experience.mouseControls.intersected.userData.params.domEl
+
+			// Add domEl
 			setTimeout(() => {
 				this.blah.style.visibility = 'hidden'
-				//document.body.removeChild(this.blah)
-				//document.body.appendChild(this.blah)
 				
-				document.body.appendChild(this.experience.el)
+				document.body.appendChild(domEl)
 
-				//const el = document.querySelector('.test')
-				const rect = this.experience.el.getBoundingClientRect()
+				const rect = domEl.getBoundingClientRect()
 				
 				const absoluteTop = window.scrollY + rect.top
 				const offset = window.innerHeight * 0.4
@@ -107,6 +120,12 @@ export default class DOMEvents
 
 	updateGoBack()
 	{
+		// fadeIn menuGroup
+		for (const child of this.experience.world.menu.menuGroup.children)
+		{
+			gsap.to(child.material, { opacity: 1, duration: 2, ease: 'linear' })
+		}
+
 		// Title and Shader
 		this.customUniforms.title.value.y = 2.0
 		this.customUniforms.shaderPosition.y = 0
@@ -125,7 +144,7 @@ export default class DOMEvents
 
 		this.blah.style.visibility = 'visible'
 
-		this.experience.el.remove()
+		//this.experience.el.remove()
 
 		setTimeout(() => {
 			this.state = 'splash'

@@ -15,8 +15,7 @@ export default class MouseControls
 		this.raycaster = new THREE.Raycaster()
 		this.rayMouse = new THREE.Vector2()
 		this.boxToTest = new THREE.Box3()
-		this.currentIntersect = null
-		this.previousIntersect = null
+		this.intersected = null
 
 		this.createMouseObject()
 		this.updateMouse()
@@ -61,9 +60,13 @@ export default class MouseControls
 				}
 				*/
 
+				document.body.style.cursor = 'default'
+
 				if(this.experience.world.events.state === 'splash')
 				{
 					let intersecting = false
+					this.intersected = null
+
 					for (const object of this.experience.world.objectsToIntersect)
 					{
 						this.boxToTest.setFromObject(object)
@@ -72,6 +75,8 @@ export default class MouseControls
 						{
 							object.userData.intersected = true
 							intersecting = true
+							this.intersected = object
+							document.body.style.cursor = 'pointer'
 						}
 					}
 					if(!intersecting && !this.colorObject.surfaceColor.equals(this.colorObject.surfaceColorStart))
@@ -88,4 +93,5 @@ export default class MouseControls
 			}, { passive: true })
 
 	}
+
 }

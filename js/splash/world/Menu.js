@@ -17,6 +17,10 @@ export default class Menu
 		this.mouse = this.experience.mouseControls.mouse
 		this.colorObject = this.experience.uniforms.colorObject
 
+		// Group
+		this.menuGroup = new THREE.Group()
+		this.world.magicGroup.add(this.menuGroup)
+
 		// Params
 		this.menuCreated = false
 		this.lerpSpeed = 0.03
@@ -27,19 +31,28 @@ export default class Menu
 				id: 1,
 				text: 'About',
 				color: 'aqua',
-				domEl: 'id1',
+				domEl: document.querySelector('#about'),
 				opacity: 1,
-				scale: new THREE.Vector3(0.015, 0.015, 0.0001),
-				position: new THREE.Vector3(-25, 12, -10)
+				scale: new THREE.Vector3(0.011, 0.011, 0.0001),
+				position: new THREE.Vector3(-20, 12, -10)
 			},
 			{
 				id: 2,
 				text: 'Projects',
 				color: 'orange',
-				domEl: 'id2',
+				domEl: document.querySelector('#projects'),
 				opacity: 1,
-				scale: new THREE.Vector3(0.015, 0.015, 0.0001),
-				position: new THREE.Vector3(-15, 12, -10)
+				scale: new THREE.Vector3(0.011, 0.011, 0.0001),
+				position: new THREE.Vector3(-5, 12, -10)
+			},
+			{
+				id: 3,
+				text: 'Publications',
+				color: 'lightgreen',
+				domEl: document.querySelector('#publications'),
+				opacity: 1,
+				scale: new THREE.Vector3(0.011, 0.011, 0.0001),
+				position: new THREE.Vector3(10, 12, -10)
 			}
 		]
 
@@ -82,8 +95,15 @@ export default class Menu
 			item.mesh.position.copy(item.position)
 			item.mesh.scale.copy(item.scale)
 			item.mesh.userData.params = item
+			this.menuGroup.add(item.mesh)
 			//this.scene.add(item.mesh)
-			this.world.magicGroup.add(item.mesh)
+			//this.world.magicGroup.add(item.mesh)
+
+			// center geometry
+			//item.geometry.computeBoundingBox()
+			//let offset = new THREE.Vector3()
+			//item.geometry.boundingBox.getCenter(offset).negate()
+			//item.geometry.translate(offset.x, 0, 0)// -only translating on the x-axis
 
 			item.mesh.userData.intersected = false
 			item.mesh.userData.previousIntersect = false

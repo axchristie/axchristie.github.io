@@ -46,7 +46,7 @@ canvas {
 	}
 }
 
-.test {
+.test,.section {
 	min-height: 100vh; /* fills at least one screen */
 	width: 80%;
 
