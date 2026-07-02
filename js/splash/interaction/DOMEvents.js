@@ -11,6 +11,7 @@ export default class DOMEvents
 		this.experience = new Experience()
 		this.world = new World()
 		this.camera = this.experience.camera
+		this.colorObject = this.experience.uniforms.colorObject
 
 		// Custom Uniforms
 		this.customUniforms = this.experience.customUniforms
@@ -18,7 +19,7 @@ export default class DOMEvents
 		this.navbarScrollMultiplier = 2.5
 
 		// state
-		this.state = 'splash'	// splash, navbar, goback
+		this.state = 'splash'	// splash, godown, navbar, goback
 
 		// Test
 		this.test()
@@ -31,6 +32,11 @@ export default class DOMEvents
 		{
 			// Only proceed if we're intersecting
 			if(!this.experience.mouseControls.intersected){ return }
+
+			this.state = 'godown'
+
+			// Manually set colorObject.surfaceColor to ensure user doesn't unset it via mousemove
+			//this.colorObject.surfaceColor = new THREE.Color(this.experience.mouseControls.intersected.userData.params.color)
 
 			// fadeOut menuGroup && remove domEl children
 			for (const child of this.experience.world.menu.menuGroup.children)
@@ -131,13 +137,13 @@ export default class DOMEvents
 		this.customUniforms.shaderPosition.y = 0
 
 		// Camera
-		gsap.to(this.experience.customUniforms.camera.value, { z: 10, duration: 2, ease: 'linear' })
+		gsap.to(this.experience.customUniforms.camera.value, { z: 10, duration: 1, ease: 'linear' })
 
 		// Shader
 		gsap.to(this.experience.customUniforms.shaderScale, { z: 1, duration: 1, ease: 'linear' })
 
 		// Magic Group
-		gsap.to(this.customUniforms.magicGroup.value, { y: 0, duration: 2, ease: 'linear' })
+		gsap.to(this.customUniforms.magicGroup.value, { y: 0, duration: 1, ease: 'linear' })
 
 		// Magic Background Group
 		gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 0, duration: 2, ease: 'linear' })
@@ -148,7 +154,7 @@ export default class DOMEvents
 
 		setTimeout(() => {
 			this.state = 'splash'
-		}, 2000)
+		}, 1000)
 	}
 
 	update()
@@ -156,6 +162,10 @@ export default class DOMEvents
 		//console.log(this.state, this.experience.mouseControls.scrollProgress)
 		switch(this.state) {
 			case 'splash':
+				this.updateSplash()
+				break
+
+			case 'godown':
 				this.updateSplash()
 				break
 
