@@ -30,7 +30,7 @@ canvas {
 	left: 0;
 	z-index: 3;
 	pointer-events: none;
- 	height: calc(100vh + env(safe-area-inset-top));
+ 	height: calc(100dvh + env(safe-area-inset-top));
  	padding-top: env(safe-area-inset-top);
 }
 
@@ -40,7 +40,7 @@ canvas {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 82vh;
+	height: 82dvh;
 	width: 100vw;
 	text-align: center;
 	z-index: 1;
@@ -59,7 +59,7 @@ canvas {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 95vh;
+	height: 95dvh;
 	width: 95vw;
 	text-align: center;
 	z-index: 5;
@@ -136,7 +136,7 @@ canvas {
 
 .splash-empty
 {
-	height: 100vh;
+	height: 100dvh;
 	width: 100vw;
 	position: fixed;
 	opacity: 0;
@@ -146,12 +146,12 @@ canvas {
 
 .lil-gui.root
 {
-	margin-top: 6vh;
+	margin-top: 6dvh;
 }
 
 /* sections */
 .test,.section {
-	min-height: 100vh; /* fills at least one screen */
+	min-height: 100dvh; /* fills at least one screen */
 	width: 80%;
 
 	background-color: var(--bg-color);
