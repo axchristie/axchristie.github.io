@@ -1,7 +1,14 @@
+:root {
+	--bg-color: #dddddd;
+	--font-color: #333333;
+	--surface-color: #6661f7;
+	--depth-color: #6606c9;
+}
+
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #dddddd;
+	background-color: var(--bg-color);
 }
 
 .notch-cover {
@@ -12,7 +19,7 @@ body {
 
   height: 1vh;
 
-  background: #dddddd; /* match your Three.js renderer clear color */
+  background: var(--bg-color);
   z-index: 9999;
   pointer-events: none;
 }
@@ -42,7 +49,7 @@ canvas {
 		font-size: 12vmin;
 		white-space: nowrap;
                 font-weight: 700;
-                color: $font-color;
+                color: var(--font-color);
 	}
 }
 
@@ -63,7 +70,7 @@ canvas {
 	h2
 	{
 		font-size: 4vmin;
-		color: #dddddd;
+		color: var(--bg-color);
                 font-weight: 300;
 	}
 	.front-button
@@ -78,7 +85,7 @@ canvas {
 	}
 	.front-button-alt
 	{
-                background-image: linear-gradient(to right, $surface-color, $depth-color);
+                background-image: linear-gradient(to right, var(--surface-color), var(--depth-color));
 		border: none;
 		color: rgba(255, 255, 255, 0.9);
 		font-size: 2.5vmin;
@@ -147,7 +154,7 @@ canvas {
 	min-height: 100vh; /* fills at least one screen */
 	width: 80%;
 
-	background-color: #dddddd;
+	background-color: var(--bg-color);
 
 	font-size: 3vmin;
 
