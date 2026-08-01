@@ -66,7 +66,7 @@ export default class Menu
 		this.fontLoader = new FontLoader()
 
 		this.fontLoader.load(
-			'../../../fonts/helvetiker_regular.typeface.json',
+			'/fonts/helvetiker_regular.typeface.json',
 			(response) =>
 			{
 				this.font = response

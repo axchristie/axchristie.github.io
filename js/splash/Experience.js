@@ -50,6 +50,9 @@ export default class Experience
 		this.sections = document.querySelector('.sections')
 		this.sections.remove()
 
+		// Resize on init
+		this.resize()
+
 		// Resize event
 		window.addEventListener('resize', () =>
 			{

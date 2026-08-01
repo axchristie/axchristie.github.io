@@ -14,7 +14,7 @@ export default class Camera
 		this.canvas = this.experience.canvas
 
 		this.setInstance()
-		this.setControls()
+		//this.setControls()
 	}
 
 	setInstance()
@@ -38,6 +38,7 @@ export default class Camera
 
 	resize()
 	{
+		this.instance.fov = this.sizes.aspectRatio < 1 ? 120 : 75
 		this.instance.aspect = this.sizes.width / this.sizes.height
 		this.instance.updateProjectionMatrix()
 	}
@@ -46,13 +47,6 @@ export default class Camera
 	{
 		//this.controls.update()
 		this.instance.position.copy(this.experience.customUniforms.camera.value)
-
-		if(this.experience.sizes.aspectRatio < 1)
-		{
-			this.instance.fov = 120
-			this.instance.aspect = this.sizes.width / this.sizes.height
-			this.instance.updateProjectionMatrix()
-		}
 	}
 
 	playTurntable()

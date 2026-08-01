@@ -22,13 +22,13 @@ export default class DOMEvents
 		this.state = 'splash'	// splash, godown, navbar, goback
 
 		// Test
-		this.test()
+		this.bindSplashClick()
 	}
 
-	test()
+	bindSplashClick()
 	{
-		this.blah = document.querySelector('.splash-front')
-		this.blah.onclick = () =>
+		this.splashFront = document.querySelector('.splash-front')
+		this.splashFront.onclick = () =>
 		{
 			// Only proceed if we're intersecting
 			if(!this.experience.mouseControls.intersected){ return }
@@ -66,7 +66,7 @@ export default class DOMEvents
 
 			// Add domEl
 			setTimeout(() => {
-				this.blah.style.visibility = 'hidden'
+				this.splashFront.style.visibility = 'hidden'
 				
 				document.body.appendChild(domEl)
 
@@ -118,8 +118,8 @@ export default class DOMEvents
 
 			//this.customUniforms.magicBackgroundGroup.value.y = 73.9
 
-		// Transition to navbar once .test class hits top of window
-		//let rect = document.querySelector('.test').getBoundingClientRect()
+		// Transition to navbar once .bindSplashClick class hits top of window
+		//let rect = document.querySelector('.bindSplashClick').getBoundingClientRect()
 		//if(rect.top < 10){ this.state = 'navbar' }
 		//if(this.experience.mouseControls.scrollProgress < 0.1){ this.state = 'navbar' }
 	}
@@ -148,7 +148,7 @@ export default class DOMEvents
 		// Magic Background Group
 		gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 0, duration: 2, ease: 'linear' })
 
-		this.blah.style.visibility = 'visible'
+		this.splashFront.style.visibility = 'visible'
 
 		//this.experience.el.remove()
 

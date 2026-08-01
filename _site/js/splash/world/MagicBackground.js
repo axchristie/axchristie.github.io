@@ -25,7 +25,6 @@ export default class MagicBackground
 			})
 		)
 		this.testCube.position.set(0, 0, -20)
-		this.testCube.castShadow = true
 		this.world.magicBackgroundGroup.add(this.testCube)
 	}
 }

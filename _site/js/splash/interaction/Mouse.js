@@ -34,64 +34,59 @@ export default class MouseControls
 
 	updateMouse()
 	{
-		window.addEventListener('mousemove', (event) =>
-			{
-				this.mouse.x.value = event.clientX / this.sizes.width
-				this.mouse.y.value = -(event.clientY / this.sizes.height) + 0.5
-
-				this.rayMouse.x = (event.clientX / this.sizes.width) * 2 - 1
-				this.rayMouse.y = -(event.clientY / this.sizes.height) * 2 + 1
-
-				this.raycaster.setFromCamera(this.rayMouse, this.experience.camera.instance)
-
-				// Unset all objectsToIntersect.userData.intersected
-				for (const object of this.experience.world.objectsToIntersect){
-					object.userData.intersected = false
-				}
-
-				/* DEPRECATED
-				const intersects = this.raycaster.intersectObjects(this.experience.world.objectsToIntersect)
-				if(intersects.length > 0)
-				{
-					intersects[0].object.userData.intersected = true
-					//this.experience.world.testCube.material.wireframe = true
-				} else {
-					//this.experience.world.testCube.material.wireframe = false
-				}
-				*/
-
-				document.body.style.cursor = 'default'
-
-				if(this.experience.world.events.state === 'splash')
-				{
-					let intersecting = false
-					this.intersected = null
-
-					for (const object of this.experience.world.objectsToIntersect)
-					{
-						this.boxToTest.setFromObject(object)
-	
-						if (this.raycaster.ray.intersectsBox(this.boxToTest))
-						{
-							object.userData.intersected = true
-							intersecting = true
-							this.intersected = object
-							document.body.style.cursor = 'pointer'
-						}
-					}
-					if(!intersecting && !this.colorObject.surfaceColor.equals(this.colorObject.surfaceColorStart))
-					{
-						this.colorObject.surfaceColor.lerp(this.colorObject.surfaceColorStart, this.lerpSpeed)
-					}
-				}
-			})
+		window.addEventListener('pointermove', (event) => this.onPointer(event))
+		window.addEventListener('pointerdown', (event) => this.onPointer(event))
 
 		window.addEventListener('scroll', () => {
-				this.scrollY = window.scrollY
-				this.maxScroll = document.body.scrollHeight - window.innerHeight;
-				this.scrollProgress = this.scrollY / this.maxScroll;
-			}, { passive: true })
+			this.scrollY = window.scrollY
+			this.maxScroll = document.body.scrollHeight - window.innerHeight
+			this.scrollProgress = this.maxScroll > 0 ? this.scrollY / this.maxScroll : 0
+		}, { passive: true })
+	}
 
+	onPointer(event)
+	{
+		// this.mouse
+		this.mouse.x.value = event.clientX / this.sizes.width
+		this.mouse.y.value = -(event.clientY / this.sizes.height) + 0.5
+	
+		// this.rayMouse - for raycasting
+		this.rayMouse.x = (event.clientX / this.sizes.width) * 2 - 1
+		this.rayMouse.y = -(event.clientY / this.sizes.height) * 2 + 1
+	
+		this.raycaster.setFromCamera(this.rayMouse, this.experience.camera.instance)
+	
+		// Raycaster intersections
+		for (const object of this.experience.world.objectsToIntersect)
+		{
+			object.userData.intersected = false
+		}
+	
+		document.body.style.cursor = 'default'
+	
+		if(this.experience.world.events.state === 'splash')
+		{
+			let intersecting = false
+			this.intersected = null
+	
+			for (const object of this.experience.world.objectsToIntersect)
+			{
+				this.boxToTest.setFromObject(object)
+	
+				if (this.raycaster.ray.intersectsBox(this.boxToTest))
+				{
+					object.userData.intersected = true
+					intersecting = true
+					this.intersected = object
+					document.body.style.cursor = 'pointer'
+				}
+			}
+	
+			if(!intersecting && !this.colorObject.surfaceColor.equals(this.colorObject.surfaceColorStart))
+			{
+				this.colorObject.surfaceColor.lerp(this.colorObject.surfaceColorStart, this.lerpSpeed)
+			}
+		}
 	}
 
 }
