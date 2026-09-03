@@ -39,8 +39,8 @@ export default class MouseControls
 
 		window.addEventListener('scroll', () => {
 			this.scrollY = window.scrollY
-			this.maxScroll = document.body.scrollHeight - window.innerHeight
-			this.scrollProgress = this.maxScroll > 0 ? this.scrollY / this.maxScroll : 0
+			// Progress runs 0 → 1 over a fixed fraction of the viewport.
+			this.scrollProgress = Math.min(this.scrollY / (window.innerHeight * 0.8), 1)
 		}, { passive: true })
 	}
 

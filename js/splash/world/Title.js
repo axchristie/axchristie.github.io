@@ -47,11 +47,37 @@ export default class Title
 			transparent: true,
 			opacity: this.experience.customUniforms.opacity.value
 		})
+		
 
 		this.mesh = new THREE.Mesh(this.geometry, this.material)
-		this.mesh.position.set(-15, 2.0, -10)
-		this.mesh.scale.set(0.025, 0.025, 0.0005)
+
+		// center geometry
+		this.mesh.geometry.computeBoundingBox()
+		const offset = new THREE.Vector3()
+		this.mesh.geometry.boundingBox.getCenter(offset).negate()
+		this.mesh.geometry.translate(offset.x, 0, 0)
+
 		this.world.magicGroup.add(this.mesh)
+
+		// layout Title
+		this.layout()
+	}
+
+	layout()
+	{
+		if(!this.mesh){ return }
+
+		const extents = this.experience.camera.getVisibleExtents(20)
+		const portrait = this.experience.sizes.aspectRatio < 1
+
+		this.geometry.computeBoundingBox()
+		const raw = this.geometry.boundingBox.max.x - this.geometry.boundingBox.min.x
+		const scale = (extents.width * (portrait ? 0.8 : 0.46)) / raw
+		this.mesh.scale.set(scale, scale, 0.0005)
+
+		// x/z only — y is driven by scroll in DOMEvents. // review
+		this.experience.customUniforms.title.value.x = 0
+		this.experience.customUniforms.title.value.z = -10
 	}
 
 	update()

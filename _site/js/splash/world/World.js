@@ -88,6 +88,13 @@ export default class World
 		this.scene.add(this.testCube)
 	}
 
+	resize()
+	{
+		this.shader.layout()
+		this.title.layout()
+		this.menu.layout()
+		this.events.layout()
+	}
 
 	update()
 	{

@@ -35,6 +35,16 @@ export default class Shader
 		}
 	}
 
+	layout()
+	{
+		const portrait = this.experience.sizes.aspectRatio < 1
+		// Portrait has far more vertical room than horizontal; stretch the plane so
+		// the waves fill the taller frame. DOMEvents animates z, so x/y are free.
+		//this.customUniforms.shaderScale.x = portrait ? 1.4 : 1.0
+		//this.customUniforms.shaderScale.y = portrait ? 1.8 : 1.0
+		this.customUniforms.shaderScale.z = portrait ? 2.8 : 1.0
+	}
+
 	shaderGeometry()
 	{
 		this.shaderGeometry = new THREE.PlaneGeometry(15, 10, 512, 512)

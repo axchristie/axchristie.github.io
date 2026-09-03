@@ -70,6 +70,7 @@ export default class Experience
 	{
 		this.sizes.resize()
 		this.camera.resize()
+		this.world.resize()
 		this.renderer.resize()
 	}
 

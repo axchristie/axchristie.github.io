@@ -26,33 +26,29 @@ export default class Menu
 		this.lerpSpeed = 0.03
 
 		// Setup
+		this.menuDepth = -10
+		this.layoutDistance = 20
 		this.menuItems = [
 			{
 				id: 1,
 				text: 'About',
 				color: 'aqua',
 				domEl: document.querySelector('#about'),
-				opacity: 1,
-				scale: new THREE.Vector3(0.011, 0.011, 0.0001),
-				position: new THREE.Vector3(-20, 12, -10)
+				opacity: 1
 			},
 			{
 				id: 2,
 				text: 'Projects',
 				color: 'orange',
 				domEl: document.querySelector('#projects'),
-				opacity: 1,
-				scale: new THREE.Vector3(0.011, 0.011, 0.0001),
-				position: new THREE.Vector3(-5, 12, -10)
+				opacity: 1
 			},
 			{
 				id: 3,
 				text: 'Publications',
 				color: 'lightgreen',
 				domEl: document.querySelector('#publications'),
-				opacity: 1,
-				scale: new THREE.Vector3(0.011, 0.011, 0.0001),
-				position: new THREE.Vector3(10, 12, -10)
+				opacity: 1
 			}
 		]
 
@@ -92,23 +88,61 @@ export default class Menu
 			})
 
 			item.mesh = new THREE.Mesh(item.geometry, item.material)
-			item.mesh.position.copy(item.position)
-			item.mesh.scale.copy(item.scale)
 			item.mesh.userData.params = item
 			this.menuGroup.add(item.mesh)
 			//this.scene.add(item.mesh)
 			//this.world.magicGroup.add(item.mesh)
 
 			// center geometry
-			//item.geometry.computeBoundingBox()
-			//let offset = new THREE.Vector3()
-			//item.geometry.boundingBox.getCenter(offset).negate()
-			//item.geometry.translate(offset.x, 0, 0)// -only translating on the x-axis
+			item.geometry.computeBoundingBox()
+			const offset = new THREE.Vector3()
+			item.geometry.boundingBox.getCenter(offset).negate()
+			item.geometry.translate(offset.x, 0, 0)
 
 			item.mesh.userData.intersected = false
 			item.mesh.userData.previousIntersect = false
 			this.world.objectsToIntersect.push(item.mesh)
+
 		}
+	}
+
+	layout()
+	{
+		if(!this.menuCreated){ return }
+
+		const extents = this.experience.camera.getVisibleExtents(this.layoutDistance)
+		const portrait = this.experience.sizes.aspectRatio < 1
+
+		// Scale every item by the widest word so they share a type size, sized to a
+		// fraction of the visible width. // review
+		let widest = 0
+		for (const item of this.menuItems)
+		{
+			item.geometry.computeBoundingBox()
+			const raw = item.geometry.boundingBox.max.x - item.geometry.boundingBox.min.x
+			if(raw > widest){ widest = raw }
+		}
+
+		const widthFraction = portrait ? 0.5 : 0.12
+		const scale = (extents.width * widthFraction) / widest
+
+		this.menuItems.forEach((item, i) =>
+		{
+			item.mesh.scale.set(scale, scale, 0.0001)
+
+			if(portrait)
+			{
+				// Stacked column, centred on x
+				const spacing = extents.height * 0.075
+				const top = extents.height * 0.36
+				item.mesh.position.set(0, top - (i * spacing), this.menuDepth)
+			} else {
+				// Row across the middle 60% of the frame
+				const span = extents.width * 0.6
+				const step = span / (this.menuItems.length - 1)
+				item.mesh.position.set(-span * 0.5 + (i * step), extents.height * 0.38, this.menuDepth)
+			}
+		})
 	}
 
 	updateMenuItems()
@@ -158,6 +192,7 @@ export default class Menu
 			//this.mesh.userData.relativeQuat = new THREE.Quaternion()
 			//this.mesh.userData.relativeQuat.copy(this.experience.camera.instance.quaternion).invert().multiply(this.mesh.quaternion)
 			this.menuCreated = true
+			this.layout()
 		}
 
 		if(this.font && this.menuCreated){

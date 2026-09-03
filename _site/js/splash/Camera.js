@@ -17,6 +17,13 @@ export default class Camera
 		//this.setControls()
 	}
 
+	// Returns width, height in world units at a given distance from the camera.
+	getVisibleExtents(distance)
+	{
+		const height = 2 * Math.tan(THREE.MathUtils.degToRad(this.instance.fov) * 0.5) * distance
+		return { height: height, width: height * this.instance.aspect }
+	}
+
 	setInstance()
 	{
 		this.instance = new THREE.PerspectiveCamera(

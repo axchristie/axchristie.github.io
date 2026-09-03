@@ -23,6 +23,36 @@ export default class DOMEvents
 
 		// Test
 		this.bindSplashClick()
+
+		// Layout
+		this.layout()
+	}
+
+	layout()
+	{
+		const portrait = this.experience.sizes.aspectRatio < 1
+
+		// Use getVisibleExtents to position element at z-distance from camera
+		const splashExtents = this.camera.getVisibleExtents(20)
+		const titleExtents = this.camera.getVisibleExtents(30)
+		const shaderExtents = this.camera.getVisibleExtents(20)
+
+		// Portrait moves title to the bottom, occupying the vertical space
+		this.titleSplashY = portrait ? -splashExtents.height * 0.26 : 2.0
+		this.titleNavbarY = titleExtents.height * (portrait ? 0.34 : 0.359)
+		this.shaderSplashY = portrait ? 1.0 : 0
+		this.shaderNavbarY = shaderExtents.height * 0.32
+
+		// Position magicBackground using getVisibleExtents
+		const backgroundExtents = this.camera.getVisibleExtents(40)
+		this.backgroundCutoffFraction = portrait ? 0.70 : 0.78
+		this.backgroundNavbarY = (this.backgroundCutoffFraction * backgroundExtents.height * 0.5) + 50
+
+		if(this.state === 'splash')
+		{
+			this.customUniforms.title.value.y = this.titleSplashY
+			this.customUniforms.shaderPosition.y = this.shaderSplashY
+		}
 	}
 
 	bindSplashClick()
@@ -59,7 +89,7 @@ export default class DOMEvents
 
 			// Magic BackgroundGroup
 			//gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 30, duration: 2, ease: 'linear' })
-			gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 74, duration: 2, ease: 'linear' })
+			gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: this.backgroundNavbarY, duration: 2, ease: 'linear' })
 
 			// Set domEl
 			let domEl = this.experience.mouseControls.intersected.userData.params.domEl
@@ -95,22 +125,15 @@ export default class DOMEvents
 
 	updateNavbar()
 	{
-		//console.log(this.experience.mouseControls.scrollProgress)
+		const p = this.experience.mouseControls.scrollProgress
 
-		// Position title and shader from scrollProgress
-		this.customUniforms.title.value.y = (this.experience.mouseControls.scrollProgress * 20 * this.navbarScrollMultiplier)
-		this.customUniforms.shaderPosition.y = (this.experience.mouseControls.scrollProgress * 14 * this.navbarScrollMultiplier) - 1.7
+		this.customUniforms.title.value.y = THREE.MathUtils.lerp(this.titleSplashY, this.titleNavbarY, p)
+		this.customUniforms.shaderPosition.y = THREE.MathUtils.lerp(this.shaderSplashY, this.shaderNavbarY, p)
 
-		// Clamp title and shader pos to make them sticky
-		if(this.customUniforms.title.value.y > 16.5){
-			this.customUniforms.title.value.y = 16.5
-			this.customUniforms.shaderPosition.y = 9.87
-		}
-
-		if(this.customUniforms.magicBackgroundGroup.value.y < 74)
+		if(this.customUniforms.magicBackgroundGroup.value.y < this.backgroundNavbarY)
 		{
-			//this.customUniforms.magicGroup.value.y = (this.experience.mouseControls.scrollProgress * 10)
-			this.customUniforms.magicBackgroundGroup.value.y = 60 + (this.experience.mouseControls.scrollProgress * 50)
+			this.customUniforms.magicBackgroundGroup.value.y =
+				Math.min(this.backgroundNavbarY * (0.81 + p * 0.68), this.backgroundNavbarY)
 		}
 
 		// Fire goback state
@@ -133,8 +156,8 @@ export default class DOMEvents
 		}
 
 		// Title and Shader
-		this.customUniforms.title.value.y = 2.0
-		this.customUniforms.shaderPosition.y = 0
+		this.customUniforms.title.value.y = this.titleSplashY
+		this.customUniforms.shaderPosition.y = this.shaderSplashY
 
 		// Camera
 		gsap.to(this.experience.customUniforms.camera.value, { z: 10, duration: 1, ease: 'linear' })
