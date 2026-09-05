@@ -21,12 +21,20 @@ export default class MouseControls
 		this.updateMouse()
 	}
 
+	layout()
+	{
+		if(this.sizes.aspectRatio < 1){ this.mouse.y.value = this.portraitMouseY }
+	}
+
 	createMouseObject()
 	{
 		this.mouse = {
 			x: { value: 0.5 },
 			y: { value: 0.0 },
 		}
+
+		// Portrait has no hover, so mouse.y is authored rather than tracked - modulates uSmallWavesFrequency in glsl
+		this.portraitMouseY = 0.10
 
 		this.scrollY = 0
 		this.scrollProgress = 0
@@ -47,8 +55,14 @@ export default class MouseControls
 	onPointer(event)
 	{
 		// this.mouse
-		this.mouse.x.value = event.clientX / this.sizes.width
-		this.mouse.y.value = -(event.clientY / this.sizes.height) + 0.5
+		//this.mouse.x.value = event.clientX / this.sizes.width
+		//this.mouse.y.value = -(event.clientY / this.sizes.height) + 0.5
+
+		if(this.sizes.aspectRatio >= 1)
+		{
+			this.mouse.x.value = event.clientX / this.sizes.width
+			this.mouse.y.value = -(event.clientY / this.sizes.height) + 0.5
+		}
 	
 		// this.rayMouse - for raycasting
 		this.rayMouse.x = (event.clientX / this.sizes.width) * 2 - 1

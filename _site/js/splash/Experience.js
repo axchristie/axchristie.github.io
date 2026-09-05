@@ -69,6 +69,7 @@ export default class Experience
 	resize()
 	{
 		this.sizes.resize()
+		this.mouseControls.layout()
 		this.camera.resize()
 		this.world.resize()
 		this.renderer.resize()

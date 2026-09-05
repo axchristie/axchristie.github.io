@@ -16,8 +16,6 @@ export default class DOMEvents
 		// Custom Uniforms
 		this.customUniforms = this.experience.customUniforms
 
-		this.navbarScrollMultiplier = 2.5
-
 		// state
 		this.state = 'splash'	// splash, godown, navbar, goback
 
@@ -48,10 +46,15 @@ export default class DOMEvents
 		this.backgroundCutoffFraction = portrait ? 0.70 : 0.78
 		this.backgroundNavbarY = (this.backgroundCutoffFraction * backgroundExtents.height * 0.5) + 50
 
+		// Portrait exaggerates shaderScaleZ to fill vertical space
+		this.shaderSplashScaleZ = portrait ? 3.0 : 1.0
+		this.shaderNavbarScaleZ = 0.2
+
 		if(this.state === 'splash')
 		{
 			this.customUniforms.title.value.y = this.titleSplashY
 			this.customUniforms.shaderPosition.y = this.shaderSplashY
+			this.customUniforms.shaderScale.z = this.shaderSplashScaleZ
 		}
 	}
 
@@ -82,7 +85,7 @@ export default class DOMEvents
 			gsap.to(this.experience.customUniforms.camera.value, { z: 20, duration: 2, ease: 'linear' })
 
 			// Shader
-			gsap.to(this.experience.customUniforms.shaderScale, { z: 0.2, duration: 1, ease: 'linear' })
+			gsap.to(this.experience.customUniforms.shaderScale, { z: this.shaderNavbarScaleZ, duration: 1, ease: 'linear' })
 
 			// Magic Group
 			gsap.to(this.customUniforms.magicGroup.value, { y: 2, duration: 2, ease: 'linear' })
@@ -138,13 +141,6 @@ export default class DOMEvents
 
 		// Fire goback state
 		if(this.experience.mouseControls.scrollProgress < 0.15){ this.state = 'goback' }
-
-			//this.customUniforms.magicBackgroundGroup.value.y = 73.9
-
-		// Transition to navbar once .bindSplashClick class hits top of window
-		//let rect = document.querySelector('.bindSplashClick').getBoundingClientRect()
-		//if(rect.top < 10){ this.state = 'navbar' }
-		//if(this.experience.mouseControls.scrollProgress < 0.1){ this.state = 'navbar' }
 	}
 
 	updateGoBack()
@@ -163,7 +159,7 @@ export default class DOMEvents
 		gsap.to(this.experience.customUniforms.camera.value, { z: 10, duration: 1, ease: 'linear' })
 
 		// Shader
-		gsap.to(this.experience.customUniforms.shaderScale, { z: 1, duration: 1, ease: 'linear' })
+		gsap.to(this.experience.customUniforms.shaderScale, { z: this.shaderSplashScaleZ, duration: 1, ease: 'linear' })
 
 		// Magic Group
 		gsap.to(this.customUniforms.magicGroup.value, { y: 0, duration: 1, ease: 'linear' })
