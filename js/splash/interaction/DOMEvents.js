@@ -19,6 +19,9 @@ export default class DOMEvents
 		// state
 		this.state = 'splash'	// splash, godown, navbar, goback
 
+		// activeSection
+		this.activeSection = null
+
 		// Test
 		this.bindSplashClick()
 
@@ -94,8 +97,9 @@ export default class DOMEvents
 			//gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: 30, duration: 2, ease: 'linear' })
 			gsap.to(this.customUniforms.magicBackgroundGroup.value, { y: this.backgroundNavbarY, duration: 2, ease: 'linear' })
 
-			// Set domEl
+			// Set domEl and activeSection
 			let domEl = this.experience.mouseControls.intersected.userData.params.domEl
+			this.activeSection = domEl
 
 			// Add domEl
 			setTimeout(() => {
@@ -169,9 +173,15 @@ export default class DOMEvents
 
 		this.splashFront.style.visibility = 'visible'
 
-		//this.experience.el.remove()
+		// remove activeSection
+		if(this.activeSection)
+		{
+			this.activeSection.remove()
+			this.activeSection = null
+		}
 
 		setTimeout(() => {
+
 			this.state = 'splash'
 		}, 1000)
 	}
