@@ -40,13 +40,13 @@ export default class DOMEvents
 
 		// Portrait moves title to the bottom, occupying the vertical space
 		this.titleSplashY = portrait ? -splashExtents.height * 0.26 : 2.0
-		this.titleNavbarY = titleExtents.height * (portrait ? 0.34 : 0.359)
+		this.titleNavbarY = titleExtents.height * (portrait ? 0.42 : 0.359)
 		this.shaderSplashY = portrait ? 1.0 : 0
-		this.shaderNavbarY = shaderExtents.height * 0.32
+		this.shaderNavbarY = shaderExtents.height * (portrait ? 0.40 : 0.32)
 
 		// Position magicBackground using getVisibleExtents
 		const backgroundExtents = this.camera.getVisibleExtents(40)
-		this.backgroundCutoffFraction = portrait ? 0.70 : 0.78
+		this.backgroundCutoffFraction = portrait ? 0.865 : 0.78
 		this.backgroundNavbarY = (this.backgroundCutoffFraction * backgroundExtents.height * 0.5) + 50
 
 		// Portrait exaggerates shaderScaleZ to fill vertical space

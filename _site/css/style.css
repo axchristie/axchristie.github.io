@@ -219,7 +219,7 @@ canvas {
 }
 
 .subsection--media { grid-template-columns: 4rem minmax(0, 1.1fr) minmax(0, 1fr); }
-.subsection--cite  { grid-template-columns: 4rem 7rem minmax(0, 1fr); }
+.subsection--cite  { grid-template-columns: 4rem 15rem minmax(0, 1fr); }
 
 .subsection--media .subsection_content,
 .subsection--cite  .subsection_content { grid-column: 3; }
@@ -257,7 +257,7 @@ canvas {
 .subsection a:hover { border-bottom-color: var(--accent); }
 
 .subsection img { display: block; width: 100%; height: auto; }
-.subsection--cite img { max-height: 10rem; max-width: 100%; width: auto; }
+.subsection--cite img { max-height: 30rem; max-width: 100%; width: auto; }
 
 /* Portrait: collapse to a single content column */
 @media (min-width: 1400px) {
