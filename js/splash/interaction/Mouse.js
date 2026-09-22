@@ -23,7 +23,7 @@ export default class MouseControls
 
 	layout()
 	{
-		if(this.sizes.aspectRatio < 1){ this.mouse.y.value = this.portraitMouseY }
+		if(this.sizes.aspectRatio < 1){ this.mouse.y.value = this.portraitMouseY } else { this.mouse.y.value = this.landscapeMouseY }
 	}
 
 	createMouseObject()
@@ -35,6 +35,7 @@ export default class MouseControls
 
 		// Portrait has no hover, so mouse.y is authored rather than tracked - modulates uSmallWavesFrequency in glsl
 		this.portraitMouseY = 0.10
+		this.landscapeMouseY = 0.15
 
 		this.scrollY = 0
 		this.scrollProgress = 0
